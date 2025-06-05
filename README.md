@@ -14,11 +14,7 @@ A fictional search engine powered by AI, built with React and TypeScript. Enter 
    git clone https://github.com/mdluex/Mdluex-Search.git
    cd Mdluex-Search
    ```
-3. Install dependencies:
-   ```bash
-   npm install
-   ```
-4. Set up your environment:
+3. Set up your environment:
    - For Gemini API (optional): Set the `API_KEY` environment variable
    - For Ollama (optional): Install from [ollama.com/download](https://ollama.com/download)
 
@@ -28,23 +24,23 @@ A fictional search engine powered by AI, built with React and TypeScript. Enter 
 2. Click the green "Code" button
 3. Select "Download ZIP"
 4. Extract the ZIP file to your desired location
-5. Open a terminal in the extracted directory
-6. Install dependencies:
-   ```bash
-   npm install
-   ```
-7. Set up your environment as described in Option 1
+5. Set up your environment as described in Option 1
 
-### Post-Installation
+### Starting the Application
 
 After installation, you can start the application using either:
 
 - Windows: Double-click `start-app.bat`
+  - The script will automatically install dependencies and start the application
+  - It will also check for required software and offer to create a shareable link
+
 - Linux/Mac: 
   ```bash
   chmod +x start-app.sh
   ./start-app.sh
   ```
+  - The script will automatically install dependencies and start the application
+  - It will also check for required software and offer to create a shareable link
 
 For more details on running the application, see the [Running the Application](#2-running-the-application) section below.
 
