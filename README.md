@@ -1,4 +1,3 @@
-
 # Mdluex Search | The Fictional Internet
 
 Mdluex Search is an AI-powered search engine that generates fictional search results and web pages. Users can interact with a simulated internet where content is dynamically created by AI. The application supports both Google's Gemini API and local Ollama models as content generation backends, featuring a vibrant, responsive interface with dark and light theme support for generated pages.
@@ -7,6 +6,7 @@ Mdluex Search is an AI-powered search engine that generates fictional search res
 
 *   **AI-Powered Search:** Enter any query and get a list of fictional search results.
 *   **Dynamic Content Generation:** Clicking a search result generates a full, unique HTML webpage on the fly.
+*   **Shareable Links:** Create temporary public URLs using Localtunnel to share your search results with others.
 *   **Dual AI Provider Support:**
     *   **Gemini:** Utilizes Google's Generative AI models for high-quality content.
     *   **Ollama:** Supports running local large language models for offline or custom use.
@@ -30,7 +30,8 @@ Mdluex Search is an AI-powered search engine that generates fictional search res
     *   Direct HTTP requests to Ollama's API
 *   **Icons:** React Feather
 *   **Module Loading:** ES Modules via `esm.sh` (no build step)
-*   **Development Server (via `start-app.bat`):** `serve` (npx)
+*   **Development Server:** Vite
+*   **Tunneling:** Localtunnel for creating shareable links
 
 ## Prerequisites
 
@@ -43,6 +44,9 @@ Before you begin, ensure you have the following installed:
     *   Download and install from [ollama.com/download](https://ollama.com/download).
     *   Ensure the `ollama` command is in your system's PATH.
     *   Pull some models after installation (e.g., `ollama pull llama3`, `ollama pull mistral`).
+3.  **Localtunnel (Optional, for shareable links):**
+    *   Will be automatically installed via `npx` when needed.
+    *   No manual installation required.
 
 ## Setup and Running the Application
 
@@ -58,20 +62,40 @@ If you plan to use the Gemini provider, you need an API key from Google AI Studi
 
 ### 2. Running the Application
 
-#### Using `start-app.bat` (Windows)
+#### Using Start Scripts
 
-The easiest way to start the application and Ollama (if installed) is by using the provided `start-app.bat` script:
+The easiest way to start the application is by using the provided start scripts:
 
+##### Windows (`start-app.bat`)
 1.  Save all project files (including `start-app.bat`) into a directory.
 2.  **Ensure `API_KEY` environment variable is set if you intend to use Gemini.**
 3.  Double-click `start-app.bat`.
     This script will:
     *   Check for Node.js, npm, and Ollama installations.
-    *   Run `npm install` (this is harmless if no `package.json` exists but good for future-proofing; `npx` handles `serve` acquisition).
-    *   Start the `ollama serve` command in a new window (if Ollama is detected).
-    *   Wait a few seconds for Ollama to initialize.
-    *   Start a local development server for the frontend application using `npx serve .` (usually on `http://localhost:3000`).
-4.  Open your browser and navigate to the URL provided by the script (e.g., `http://localhost:3000`).
+    *   Ask if you want to create a shareable link using Localtunnel.
+    *   If yes, fetch and display the tunnel password.
+    *   Start the application using Vite.
+    *   Create a shareable link at `https://mdluex-search.loca.lt` if requested.
+    *   Open your browser automatically.
+
+##### Linux/Mac (`start-app.sh`)
+1.  Save all project files (including `start-app.sh`) into a directory.
+2.  Make the script executable:
+    ```bash
+    chmod +x start-app.sh
+    ```
+3.  **Ensure `API_KEY` environment variable is set if you intend to use Gemini.**
+4.  Run the script:
+    ```bash
+    ./start-app.sh
+    ```
+    This script will:
+    *   Check for Node.js, npm, and Ollama installations.
+    *   Ask if you want to create a shareable link using Localtunnel.
+    *   If yes, fetch and display the tunnel password.
+    *   Start the application using Vite.
+    *   Create a shareable link at `https://mdluex-search.loca.lt` if requested.
+    *   Open your browser automatically.
 
 #### Manual Startup (All Platforms)
 
@@ -141,6 +165,7 @@ Settings are saved to `localStorage` and persist across sessions.
 ├── metadata.json             # Application metadata
 ├── README.md                 # This file
 ├── start-app.bat             # Windows batch script to start the app and Ollama
+├── start-app.sh              # Shell script to start the app on Linux/Mac
 └── types.ts                  # TypeScript type definitions
 ```
 
