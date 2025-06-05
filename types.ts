@@ -13,69 +13,46 @@ export interface SearchResultItemData {
   title: string;
   snippet: string;
   contentType: ContentType;
-  originalQuery?: string; // To pass context to content generation
-  preferredTheme?: 'light' | 'dark' | 'system'; // Added for page-specific theme
+  originalQuery?: string; 
+  preferredTheme?: 'light' | 'dark' | 'system';
 }
 
-// Content for News Article
-export interface NewsArticleContent {
-  headline: string;
-  byline: string;
-  date: string;
-  paragraphs: string[];
-  websiteName: string; 
+export type AIProvider = 'gemini' | 'ollama';
+
+export interface OllamaModel {
+  name: string;
+  model: string;
+  modified_at: string;
+  size: number;
+  digest: string;
+  details: {
+    format: string;
+    family: string;
+    families: string[] | null;
+    parameter_size: string;
+    quantization_level: string;
+  };
 }
 
-// Content for Blog Post
-export interface BlogPostContent {
-  title: string;
-  author: string;
-  date: string;
-  paragraphs: string[];
-  websiteName: string;
-}
-
-// Content for Product Page
-export interface ProductPageContent {
-  productName: string;
-  tagline: string;
-  features: string[];
-  description: string;
-  price: string;
-  callToAction: string;
-  websiteName: string;
-  imageUrl?: string; 
-}
-
-// Content for Forum Thread
-export interface ForumPost {
-  username: string;
-  text: string;
-  timestamp?: string; 
-}
-
-export interface ForumThreadContent {
-  threadTitle: string;
-  originalPost: ForumPost;
-  replies: ForumPost[];
-  websiteName: string;
-}
-
-export type SpecificPageContent = NewsArticleContent | BlogPostContent | ProductPageContent | ForumThreadContent;
-
-export interface PageContentData {
-  type: ContentType;
-  data: SpecificPageContent;
-}
 
 export interface AppState {
   currentView: 'home' | 'results' | 'content_page';
   searchTerm: string;
   searchResults: SearchResultItemData[];
   currentContentPageInfo: {
-    content: PageContentData;
+    htmlContent: string; 
     searchItem: SearchResultItemData;
   } | null;
-  isLoading: boolean;
+  isLoadingResults: boolean;
+  isLoadingContent: boolean; 
   error: string | null;
+  
+  // Settings Modal State
+  showSettingsModal: boolean;
+  selectedProvider: AIProvider;
+  userGeminiApiKey: string; // User-entered Gemini API key
+  ollamaApiUrl: string; // Base URL for Ollama API
+  availableOllamaModels: OllamaModel[];
+  selectedOllamaModel: string; // Name of the selected Ollama model
+  isLoadingOllamaModels: boolean;
 }

@@ -1,3 +1,4 @@
+
 import React from 'react';
 import SearchBar from './SearchBar';
 import { APP_TITLE } from '../constants';
@@ -5,6 +6,7 @@ import { APP_TITLE } from '../constants';
 interface HomePageProps {
   onSearch: (query: string) => void;
   initialSearchTerm: string;
+  // isLoading prop removed, App.tsx handles global loading indicator
 }
 
 const HomePage: React.FC<HomePageProps> = ({ onSearch, initialSearchTerm }) => {
@@ -34,7 +36,7 @@ const HomePage: React.FC<HomePageProps> = ({ onSearch, initialSearchTerm }) => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-transparent text-center px-4">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-transparent text-center px-4 pt-16 sm:pt-0"> {/* Added pt-16 for small screens to avoid overlap with potential fixed header elements like settings */}
       <h1 className="text-7xl sm:text-8xl font-bold mb-4 mt-0 text-neutral-800 dark:text-white select-none">
         {APP_TITLE}
       </h1>

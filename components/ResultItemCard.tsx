@@ -1,6 +1,6 @@
+
 import React from 'react';
 import { SearchResultItemData } from '../types';
-import { getTextDirection } from '../utils/languageUtils';
 
 interface ResultItemCardProps {
   item: SearchResultItemData;
@@ -9,10 +9,6 @@ interface ResultItemCardProps {
 }
 
 const ResultItemCard: React.FC<ResultItemCardProps> = ({ item, onSelectResult, isLastItem }) => {
-  // Detect text direction for title and snippet
-  const titleDirection = getTextDirection(item.title);
-  const snippetDirection = getTextDirection(item.snippet);
-
   return (
     <div 
       className={`py-5 ${!isLastItem ? 'border-b border-transparent dark:border-neutral-800' : ''} hover:bg-gray-50 dark:hover:bg-neutral-800/30 rounded-md px-2 -mx-2 transition-colors`} // Subtle hover and padding adjustment
@@ -38,16 +34,10 @@ const ResultItemCard: React.FC<ResultItemCardProps> = ({ item, onSelectResult, i
             </svg>
         </button>
       </div>
-      <h3 
-        className="text-lg text-blue-600 dark:text-[#8ab4f8] hover:underline cursor-pointer visited:text-purple-600 dark:visited:text-purple-400 mb-0.5"
-        dir={titleDirection}
-      >
+      <h3 className="text-lg text-blue-600 dark:text-[#8ab4f8] hover:underline cursor-pointer visited:text-purple-600 dark:visited:text-purple-400 mb-0.5">
         {item.title}
       </h3>
-      <p 
-        className="text-sm text-gray-600 dark:text-neutral-300 leading-snug"
-        dir={snippetDirection}
-      >
+      <p className="text-sm text-gray-600 dark:text-neutral-300 leading-snug">
         {item.snippet}
       </p>
       {item.contentType && (

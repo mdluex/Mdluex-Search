@@ -1,6 +1,6 @@
-
 {
   "name": "Mdluex Search",
   "description": "An AI-powered search engine that generates fictional search results and web pages using Gemini, styled with a vibrant lime green theme. Explore a simulated internet where every click leads to unique, AI-created content.",
-  "requestFramePermissions": []
+  "requestFramePermissions": [],
+  "prompt": ""
 }

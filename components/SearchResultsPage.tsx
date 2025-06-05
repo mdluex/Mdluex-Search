@@ -1,9 +1,11 @@
 
 import React, { useState, useEffect } from 'react';
+import { Settings as SettingsIcon } from 'react-feather'; // Import react-feather icon
 import { SearchResultItemData } from '../types';
 import SearchBar from './SearchBar';
 import ResultItemCard from './ResultItemCard';
 import LoadingSpinner from './LoadingSpinner';
+// GearIcon import removed
 import { APP_TITLE } from '../constants';
 
 interface SearchResultsPageProps {
@@ -11,8 +13,10 @@ interface SearchResultsPageProps {
   results: SearchResultItemData[];
   onSelectResult: (item: SearchResultItemData) => void;
   onSearch: (query: string) => void;
-  isLoading: boolean;
-  onNavigateHome: () => void; // Added for logo click
+  isLoading: boolean; 
+  isLoadingSelectedContent?: boolean; 
+  onNavigateHome: () => void;
+  onOpenSettings: () => void; 
 }
 
 const RESULTS_PER_PAGE = 10;
@@ -22,8 +26,10 @@ const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
   results,
   onSelectResult,
   onSearch,
-  isLoading,
-  onNavigateHome
+  isLoading, 
+  isLoadingSelectedContent,
+  onNavigateHome,
+  onOpenSettings
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -87,28 +93,41 @@ const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
     );
   };
 
-
   return (
     <div className="bg-white dark:bg-[#202124] min-h-screen">
-      {/* Custom Header for Search Results Page */}
       <header className="py-3 px-4 sm:px-6 sticky top-0 z-40 bg-white dark:bg-[#202124] border-b border-gray-200 dark:border-neutral-700">
-        <div className="max-w-3xl mx-auto flex items-center space-x-4 sm:space-x-6">
+        <div className="max-w-3xl mx-auto flex items-center space-x-3 sm:space-x-4">
           <button onClick={onNavigateHome} className="text-lg font-semibold text-neutral-700 dark:text-white hover:opacity-80 transition-opacity" aria-label="Go to homepage">
-            {APP_TITLE.split(' ')[0]} {/* Just "Mdluex" */}
+            {APP_TITLE.split(' ')[0]}
           </button>
-          <div className="flex-grow max-w-xl"> {/* Ensure search bar doesn't get too wide */}
+          <div className="flex-grow max-w-xl">
             <SearchBar onSearch={onSearch} initialValue={searchTerm} isLoading={isLoading && results.length === 0} />
           </div>
+          <button
+            onClick={onOpenSettings}
+            className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-neutral-700 transition-colors"
+            aria-label="Open settings"
+          >
+            <SettingsIcon className="w-5 h-5 text-gray-600 dark:text-neutral-300" />
+          </button>
         </div>
-         {isLoading && results.length > 0 && (
+        
+        {isLoading && results.length > 0 && (
             <div className="max-w-3xl mx-auto mt-2 text-xs text-gray-500 dark:text-neutral-500 flex items-center">
                 <LoadingSpinner size={4} />
                 <span className="ml-2">Loading new results...</span>
             </div>
         )}
+        
+        {isLoadingSelectedContent && !isLoading && (
+             <div className="max-w-3xl mx-auto mt-2 text-xs text-gray-500 dark:text-neutral-500 flex items-center">
+                <LoadingSpinner size={4} />
+                <span className="ml-2">Preparing page content...</span>
+            </div>
+        )}
       </header>
       
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 pt-4 pb-8"> {/* Constrained width for results */}
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 pt-4 pb-8">
         {isLoading && results.length === 0 && (
           <div className="text-center py-10">
               <LoadingSpinner size={10}/>
@@ -133,7 +152,7 @@ const SearchResultsPage: React.FC<SearchResultsPageProps> = ({
             <p className="text-xs text-gray-500 dark:text-neutral-400 mb-3">
               About {results.length} AI-generated results
             </p>
-            <div className="space-y-1"> {/* Reduced space between items */}
+            <div className="space-y-1">
               {currentResults.map((item, index) => (
                 <ResultItemCard 
                     key={item.id} 
