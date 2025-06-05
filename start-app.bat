@@ -1,6 +1,9 @@
 @echo off
 setlocal enabledelayedexpansion
 
+:: Change to the directory where the script is located
+cd /d "%~dp0"
+
 echo Starting Mdluex Search Application...
 
 :: Ask user if they want to create a shareable link
