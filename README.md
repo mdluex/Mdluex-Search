@@ -1,6 +1,52 @@
 # Mdluex Search | The Fictional Internet
 
-Mdluex Search is an AI-powered search engine that generates fictional search results and web pages. Users can interact with a simulated internet where content is dynamically created by AI. The application supports both Google's Gemini API and local Ollama models as content generation backends, featuring a vibrant, responsive interface with dark and light theme support for generated pages.
+[![GitHub](https://img.shields.io/badge/GitHub-Mdluex%20Search-blue?style=flat-square&logo=github)](https://github.com/mdluex/Mdluex-Search)
+
+A fictional search engine powered by AI, built with React and TypeScript. Enter any query, and Mdluex Search returns a list of fictional (and often humorous) search results. Clicking a result generates a full, unique HTML webpage on the fly.
+
+## Installation
+
+### Option 1: Clone the Repository (Recommended)
+
+1. Open your terminal or command prompt.
+2. Clone the repository:
+   ```bash
+   git clone https://github.com/mdluex/Mdluex-Search.git
+   cd Mdluex-Search
+   ```
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+4. Set up your environment:
+   - For Gemini API (optional): Set the `API_KEY` environment variable
+   - For Ollama (optional): Install from [ollama.com/download](https://ollama.com/download)
+
+### Option 2: Download ZIP
+
+1. Visit [https://github.com/mdluex/Mdluex-Search](https://github.com/mdluex/Mdluex-Search)
+2. Click the green "Code" button
+3. Select "Download ZIP"
+4. Extract the ZIP file to your desired location
+5. Open a terminal in the extracted directory
+6. Install dependencies:
+   ```bash
+   npm install
+   ```
+7. Set up your environment as described in Option 1
+
+### Post-Installation
+
+After installation, you can start the application using either:
+
+- Windows: Double-click `start-app.bat`
+- Linux/Mac: 
+  ```bash
+  chmod +x start-app.sh
+  ./start-app.sh
+  ```
+
+For more details on running the application, see the [Running the Application](#2-running-the-application) section below.
 
 ## Features
 
