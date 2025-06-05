@@ -15,7 +15,9 @@ A fictional search engine powered by AI, built with React and TypeScript. Enter 
    cd Mdluex-Search
    ```
 3. Set up your environment:
-   - For Gemini API (optional): Set the `API_KEY` environment variable
+   - For Gemini API (optional): 
+     - Set the `API_KEY` environment variable, or
+     - Configure it later through the app's settings (click the gear icon in the top right corner)
    - For Ollama (optional): Install from [ollama.com/download](https://ollama.com/download)
 
 ### Option 2: Download ZIP
@@ -239,7 +241,9 @@ Settings are saved to `localStorage` and persist across sessions.
 
 ## Environment Variables
 
-*   **`API_KEY`**: (Required for Gemini) Your Google Gemini API key. This must be set in the environment where the application is run. The application uses `process.env.API_KEY` as a fallback if no key is provided in the settings modal.
+*   **`API_KEY`**: (Required for Gemini) Your Google Gemini API key. This can be set either:
+    - In the environment where the application is run, or
+    - Through the app's settings modal (click the gear icon in the top right corner)
 
 ## Known Limitations / Future Improvements
 
