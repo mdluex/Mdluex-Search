@@ -1,4 +1,3 @@
-
 import { OllamaModel, SearchResultItemData, ContentType } from '../types';
 import { DEFAULT_OLLAMA_API_URL, OLLAMA_PAGE_CACHE_PREFIX } from '../constants';
 
@@ -13,6 +12,7 @@ interface OllamaGenerateRequest {
   stream?: boolean;
   format?: 'json'; // Only for JSON mode, will be removed for search results
   options?: Record<string, unknown>; // For temperature, top_p etc.
+  think?: boolean;
 }
 
 interface OllamaGenerateResponse {
@@ -29,6 +29,11 @@ interface OllamaGenerateResponse {
   eval_duration?: number;
 }
 
+function shouldDisableThinking(modelName: string): boolean {
+  // Disable thinking for reasoning models (DeepSeek, Qwen, etc.)
+  const lower = modelName.toLowerCase();
+  return lower.includes('deepseek') || lower.includes('qwen');
+}
 
 export async function fetchOllamaModels(apiUrl: string = DEFAULT_OLLAMA_API_URL): Promise<OllamaModel[]> {
   const fullApiUrl = `${apiUrl.replace(/\/$/, '')}/api/tags`;
@@ -86,7 +91,6 @@ function parseOllamaJsonResponse<T>(jsonString: string): T | null {
   }
 }
 
-
 export async function generateSearchResultsOllama(
   query: string, 
   modelName: string, 
@@ -131,7 +135,8 @@ Example of the expected JSON array format (if you were asked for 1 result for '$
         temperature: 0.7, 
         // num_predict might be useful if Ollama truncates, but let's try without first
         // num_predict: 2048, // Max tokens, adjust based on model and expected output size
-    }
+    },
+    ...(shouldDisableThinking(modelName) ? { think: false } : {})
   };
 
   try {
@@ -230,7 +235,6 @@ Example of the expected JSON array format (if you were asked for 1 result for '$
     throw new Error(`Failed to communicate with Ollama for search results. ${error instanceof Error ? error.message : String(error)}`);
   }
 }
-
 
 export async function generatePageContentOllama(
   item: SearchResultItemData, 
@@ -399,7 +403,8 @@ export async function generatePageContentOllama(
     stream: false, 
     options: {
         temperature: 0.7,
-    }
+    },
+    ...(shouldDisableThinking(modelName) ? { think: false } : {})
   };
 
   try {
