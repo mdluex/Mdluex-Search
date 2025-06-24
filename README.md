@@ -1,6 +1,6 @@
 # Mdluex Search | The Fictional Internet
 
-[![GitHub](https://img.shields.io/badge/GitHub-Mdluex%20Search-blue?style=flat-square&logo=github)](https://github.com/mdluex/Mdluex-Search)
+[![GitHub](https://img.shields.io/badge/GitHub-Mdluex%20Search-blue?style=flat-square&logo=github)](https://github.com/mdluex/Mdluex-Search) [![Demo](https://img.shields.io/badge/Demo-Live%20App-brightgreen?style=flat-square&logo=vercel)](https://the-fictional-internet-by-mdluex.vercel.app/)
 
 A fictional search engine powered by AI, built with React and TypeScript. Enter any query, and Mdluex Search returns a list of fictional (and often humorous) search results. Clicking a result generates a full, unique HTML webpage on the fly.
 
